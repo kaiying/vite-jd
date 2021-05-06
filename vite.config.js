@@ -11,4 +11,12 @@ export default defineConfig({
       '@': resolve(__dirname, ''),
     },
   },
+  // global style import
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import "@/src/assets/global-import";`,
+      },
+    },
+  },
 });

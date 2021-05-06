@@ -1,0 +1,35 @@
+@mixin mediaMax($size) {
+  @media (max-width: #{$size - 1px}) { @content; }
+}
+@mixin mediaMin($size) {
+  @media (min-width: $size ) { @content; }
+}
+
+$breakpointNextSize: (
+  $grid-breakpoints-sm: $grid-breakpoints-md,
+  $grid-breakpoints-md: $grid-breakpoints-lg,
+  $grid-breakpoints-lg: $grid-breakpoints-xl
+);
+
+@function getBreakpointUpperBound($size) {
+  $max: map-get($breakpointNextSize, $size);
+  @if $max {
+    @return $max - 1px;
+  }
+  @return $max;
+};
+
+@mixin mediaIs($size) {
+  $maxSize: getBreakpointUpperBound($size);
+  @if $maxSize {
+    @media (min-width: $size) and (max-width: $maxSize) { @content; }
+  }
+  @else {
+    @media (min-width: $size) { @content; }
+  }
+}
+
+// media range min to (max -1px)
+@mixin mediaRange($minSize, $maxSize) {
+  @media (min-width: $minSize) and (max-width: $maxSize - 1px) { @content; }
+}
