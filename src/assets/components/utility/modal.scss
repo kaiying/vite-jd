@@ -1,0 +1,127 @@
+@import "src/assets/mixins/zindex";
+
+.modal-mask {
+  position: fixed;
+  @include zindex(modal);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: table;
+  transition: opacity 0.3s ease;
+}
+
+.modal-mask.is-height-limited {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  .modal-wrapper {
+    display: block;
+    height: fit-content;
+    width: 100%;
+    overflow: hidden;
+    overflow-y: scroll;
+  }
+
+  .modal-container {
+    height: 100%;
+    max-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .header,
+  .footer {
+    flex: 0;
+  }
+
+  .body {
+    overflow-y: auto;
+  }
+
+  @include mediaMax($grid-breakpoints-md) {
+    .modal-wrapper {
+      max-height: 100%;
+    }
+    .modal-container {
+      max-width: 100%;
+    }
+  }
+
+  @include mediaMin($grid-breakpoints-xl) {
+    .modal-container {
+      max-width: $container-width-lg;
+    }
+  }
+
+  &.is-height-fixed {
+    .body {
+      flex: 1;
+    }
+    @include mediaMax($grid-breakpoints-md) {
+      .modal-wrapper {
+        height: 100%;
+      }
+    }
+    @include mediaMin($grid-breakpoints-md) {
+      .modal-wrapper {
+        height: 70%;
+      }
+    }
+  }
+}
+
+.modal-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.modal-container {
+  margin: 0 auto;
+  padding: 20px 30px;
+  background-color: var(--white);
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+  transition: all 0.3s ease;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.header h3 {
+  margin-top: 0;
+  color: #42b983;
+}
+
+.body {
+  padding: 20px 0;
+}
+
+.default-button {
+  float: right;
+}
+
+/*
+ * The following styles are auto-applied to elements with
+ * transition="modal" when their visibility is toggled
+ * by Vue.js.
+ *
+ * You can easily play with the modal transition by editing
+ * these styles.
+ */
+
+.modal-enter {
+  opacity: 0;
+}
+
+.modal-leave-active {
+  opacity: 0;
+}
+
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}

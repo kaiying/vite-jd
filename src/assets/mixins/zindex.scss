@@ -1,0 +1,17 @@
+$z-index: (
+  back-to-top     : 3,
+  menubar-desktop : 50,
+  bottom-bar      : 200,
+  menubar-mobile  : 300,
+  alert-modal     : 1051, // 比 confirm 高 1
+  loading         : 3000,
+  modal           : 9998,
+);
+
+@function z-index($key) {
+  @return map-get($z-index, $key);
+}
+
+@mixin zindex($key) {
+  z-index: z-index($key);
+}
