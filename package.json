@@ -6,12 +6,14 @@
     "build": "vite build --mode production",
     "serve": "vite preview",
     "lint": "eslint --ext .js,.vue --ignore-path .eslintignore .",
-    "fix": "eslint --fix --ext .js,.vue --ignore-path .eslintignore ."
+    "fix": "eslint --fix --ext .js,.vue --ignore-path .eslintignore .",
+    "db": "json-server --watch db.json --port 6789"
   },
   "dependencies": {
     "axios": "^0.21.1",
     "babel-plugin-lodash": "^3.3.4",
     "bootstrap": "^4.6.0",
+    "json-server": "^0.16.3",
     "lodash": "^4.17.21",
     "lodash-webpack-plugin": "^0.11.6",
     "lottie-web": "^5.7.8",
